@@ -1,0 +1,125 @@
+/* reset + element base：全部仅引用令牌 */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-md);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-hover);
+}
+
+::selection {
+  background: var(--color-selection-bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+code,
+pre,
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: var(--radius-full);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+  background-clip: content-box;
+}
+
+/* codeutil-app: 根布局（侧栏固定 + 右侧头部/内容） */
+.app-layout {
+  height: 100%;
+}
+.app-layout__sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--layout-sidebar-w);
+  z-index: var(--z-sidebar);
+}
+.app-layout__main {
+  margin-left: var(--layout-sidebar-w);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.app-layout__content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+@media (max-width: 900px) {
+  .app-layout__sidebar {
+    transform: translateX(-100%);
+    transition: transform var(--transition-base) var(--ease-out);
+  }
+  .app-layout__sidebar.is-open {
+    transform: translateX(0);
+    box-shadow: var(--shadow-lg);
+  }
+  .app-layout__main {
+    margin-left: 0;
+  }
+}
+
+/* 罗小黑主题：背景叠极淡猫爪印水印 */
+:root[data-theme='xiaohei'] body {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%234a3222' fill-opacity='0.045'%3E%3Cellipse cx='34' cy='58' rx='15' ry='12'/%3E%3Cellipse cx='18' cy='38' rx='6.5' ry='8.5'/%3E%3Cellipse cx='34' cy='30' rx='6.5' ry='8.5'/%3E%3Cellipse cx='50' cy='30' rx='6.5' ry='8.5'/%3E%3Cellipse cx='66' cy='38' rx='6.5' ry='8.5'/%3E%3C/g%3E%3Cg fill='%234a3222' fill-opacity='0.03' transform='translate(70 70) rotate(24)'%3E%3Cellipse cx='34' cy='58' rx='15' ry='12'/%3E%3Cellipse cx='18' cy='38' rx='6.5' ry='8.5'/%3E%3Cellipse cx='34' cy='30' rx='6.5' ry='8.5'/%3E%3Cellipse cx='50' cy='30' rx='6.5' ry='8.5'/%3E%3Cellipse cx='66' cy='38' rx='6.5' ry='8.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 280px 280px;
+}
